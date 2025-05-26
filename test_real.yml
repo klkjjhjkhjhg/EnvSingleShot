@@ -1,0 +1,83 @@
+# general settings
+name: test_matnaf_Ours_real02
+
+model_type: MAT_model
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 10
+
+# dataset and data loader settings
+datasets:
+  test:
+    is_real: true
+    name: MatSynthRealImage
+    type: MatSynthRealImage
+    brdf_args:
+      size: 256
+      order: ndrs
+    data_path: resources/real_data/images_denoised #Ruby
+    ori_path: resources/real_data/images #Ruby
+    envmip_path: resources/real_data/mipmaps
+    envlc_path: resources/real_data/plcs
+    pattern_path: resources/real_data/patterns
+    pdfResizeTo: None
+    cat_envlc: false
+    io_backend:    
+      type: disk
+    n_img: 1
+    n_skip: 1
+    methodIndex: 0
+
+# network structures
+network_g:
+  type: LCNet
+  brdf_args:
+    nbRendering: 3
+    size: 256
+    order: pndrs
+    toLDR: True
+    lampIntensity: 20
+    type: G7XMark2
+    fov: 35
+    tan: True
+    fetchMode: NvDiff
+    texture: resources/finalNew-256.png
+    lightType: RectLighting
+    textureMode: Torch
+    truncateDiffuse: true
+    convFiltered: True
+    jitter: false
+    jitterScale: 3
+    useItenAug: false
+    # augItenScale: 2
+    rescaleEdge: true
+    uvMode: maxCosBias
+    nLod: 8
+
+  in_channel: 9
+  out_channel: 10
+  width: 32
+  enc_blk_nums: [2, 2, 4, 8]
+  middle_blk_num: 12
+  dec_blk_nums: [2, 2, 2, 2]
+  res: False
+  tanh: True #Ours
+  use_normal_lc: splitsum
+  vis_lightclues: true
+  grey_lc: true
+  real_input: true
+  jitter_act_contrib: false
+  input_pattern: true
+  input_origin: true
+
+path:
+  pretrain_network_g: ckpts/EnvSingleShot_Real.pth #Ours
+
+  loadPattern: true
+  strict_load_g: true
+
+# validation settings
+val:
+  save_gt: false
+  save_img: true
+  gammCorr: true
+  savePath: resources/real_data/svbrdfs_ours

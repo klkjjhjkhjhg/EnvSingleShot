@@ -1,0 +1,6 @@
+numpy==1.26.0
+matplotlib==3.10.0
+opencv-python==4.10.0.84
+mitsuba==3.6.4
+tqdm
+pyyaml
