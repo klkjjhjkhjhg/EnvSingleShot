@@ -3,7 +3,8 @@ Lianghao Zhang, Ruya Sun, Li Wang, Fangzhou Gao, Zixuan Wang, Jiawan Zhang*
 
 (* indicates the corresponding author)
 
-<!-- ### [Paper]() | [Data]() -->
+Official implementation of our paper accepted to Computers & Graphics. This project reconstructs spatially-varying BRDFs (SVBRDFs) from a single image under active planar lighting, supporting both synthetic and real scenes.
+We provide pre-trained models, test data, and configuration files for easy evaluation.
 
 ## Preparation
 - Set up the python environment
