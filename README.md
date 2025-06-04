@@ -16,7 +16,11 @@ conda activate EnvSingleShot
 pip install -r requirement.txt
 ```
 
-- Our project has been tested on Ubuntu 20.04 using CUDA==12.8 and PyTorch==2.7.0+cu128. You can install PyTorch by the following command.
+- Training takes approximately 50 hours in total. For users familiar with the codebase, testing a single material typically takes only a few minutes, considering the combined runtime of the related scripts.
+
+- All testing was conducted on an NVIDIA RTX 5070Ti GPU. The testing scripts are expected to run smoothly on most NVIDIA GPUs from the 30-series and above. 
+
+- Our project has been tested on Ubuntu 20.04 using CUDA==12.8 and PyTorch==2.7.0+cu128. You can install PyTorch by the following command. 
 
 ```
 pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
@@ -48,7 +52,7 @@ pip install --pre torch torchvision torchaudio --index-url https://download.pyt
         - EnvSingleShot_Real.pth
 ```
 
-## Run the code
+## Run the code (Reproduce Tab.1 and Fig. 11 in the paper)
 
 #### Testing (Synthetic Data)
 
@@ -58,7 +62,7 @@ pip install --pre torch torchvision torchaudio --index-url https://download.pyt
    python test.py -opt test_syn.yml
    ```
 
-2. Run the following command to calculate the RMSE error of estimated SVBRDFs. The printed results should be same as the results in Table 1 of our paper.
+2. Run the following command to calculate the RMSE error of estimated SVBRDFs. The printed results should be same as the results in **Table 1** of our paper.
 
    ```
    python scripts/cal_metrics.py
@@ -78,7 +82,7 @@ pip install --pre torch torchvision torchaudio --index-url https://download.pyt
 
 - In these steps, step 2 and 3 needs users to manually adjust the parameters of edge detection or lighting separation. Instead, we provided a set of pre-processed data of these steps in the `resources/real_data_ready` folder. You can skip these two manual steps by copying the data from the `resources/real_data_ready` folder to the `resources/real_data` folder. The folder that should be copied contains: `sparse`, `resource`, `mipmaps`, and `patterns`.
 
-2. After running above commands, we can run the following command to reconstruct SVBRDFs. The results will be saved in the `results/real_data/svbrdfs_ours` folder, which shoud be the same as the results in Figure 11 of our paper.
+2. After running above commands, we can run the following command to reconstruct SVBRDFs. The results will be saved in the `results/real_data/svbrdfs_ours` folder, which shoud be the same as the results in **Figure 11** of our paper.
 
   ```
   python test.py -opt test_denoise.yml
